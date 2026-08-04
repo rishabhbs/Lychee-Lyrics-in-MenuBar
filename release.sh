@@ -21,7 +21,7 @@ EXPECTED_BUNDLE_ID="personal.dev.Lychee"
 EXPECTED_TEAM_ID="NM7GSM2R53"
 EXPECTED_PUBLIC_KEY="GzFgyS6mT5HKmpbAcXG0315b0JuSCLc5jSKA8zBCbbI="
 EXPECTED_SPARKLE_VERSION="2.9.5"
-LEGACY_FEED_REPOS=("rishabhbs/Lychee-Releases" "rishabhbs/Lychee-Public")
+LEGACY_FEED_REPOS=("rishabhbs/Lychee-Releases")
 RELEASES_DIR="$SCRIPT_DIR/releases"
 LIVE_APPCAST_PATH="$SCRIPT_DIR/appcast.xml"
 BUILD_DIR=""
