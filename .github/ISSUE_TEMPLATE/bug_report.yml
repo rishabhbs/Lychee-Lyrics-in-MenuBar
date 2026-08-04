@@ -1,0 +1,58 @@
+name: Bug report
+description: Report reproducible behavior that is not working correctly
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Please remove song names, account details, and other private information from logs or screenshots.
+  - type: input
+    id: version
+    attributes:
+      label: Lychee version
+      placeholder: "1.2.0 (14)"
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: "macOS 15.5"
+    validations:
+      required: true
+  - type: dropdown
+    id: source
+    attributes:
+      label: Music source
+      options:
+        - Spotify
+        - Apple Music
+        - Both
+        - Not related to playback
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: List the smallest reliable sequence that triggers the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add sanitized logs or screenshots if they help explain the issue.

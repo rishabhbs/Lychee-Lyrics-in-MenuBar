@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Bundle Identifier -->
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	
+	<!-- Bundle Name -->
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	
+	<!-- Bundle Display Name -->
+	<key>CFBundleDisplayName</key>
+	<string>Lychee</string>
+
+	<!-- Bundle Version -->
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	
+	<!-- Bundle Short Version -->
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	
+	<!-- Bundle Executable -->
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	
+	<!-- Bundle Package Type -->
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	
+	<!-- Activation policy managed programmatically; LSUIElement=NO allows dock icon during onboarding -->
+	<key>LSUIElement</key>
+	<false/>
+	
+	<!-- AppleScript permissions -->
+	<key>NSAppleEventsUsageDescription</key>
+	<string>Lychee needs to communicate with Spotify and Apple Music to get the currently playing track.</string>
+	
+	<!-- Sparkle auto-update -->
+	<key>SUFeedURL</key>
+	<string>https://raw.githubusercontent.com/rishabhbs/Lychee-Lyrics-in-MenuBar/main/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>GzFgyS6mT5HKmpbAcXG0315b0JuSCLc5jSKA8zBCbbI=</string>
+
+	<!-- Network access for LRCLIB -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<false/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>lrclib.net</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+</dict>
+</plist>

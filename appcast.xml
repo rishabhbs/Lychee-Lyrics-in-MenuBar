@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+     xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Lychee</title>
+        <link>https://raw.githubusercontent.com/rishabhbs/Lychee-Lyrics-in-MenuBar/main/appcast.xml</link>
+        <language>en</language>
+        <item>
+            <title>Lychee 1.1.2</title>
+            <sparkle:version>13</sparkle:version>
+            <sparkle:shortVersionString>1.1.2</sparkle:shortVersionString>
+            <pubDate>Sun, 10 May 2026 21:19:13 +0000</pubDate>
+            <enclosure
+                url="https://github.com/rishabhbs/Lychee-Releases/releases/download/v1.1.2/Lychee-1.1.2.zip"
+                sparkle:edSignature="+Z0VwDTkTXPFJ36SSMTwFL1/Rbxb9VUgd+YngMEbyLOw4G9kQaJj72oVFHpjVez3eThkxt2XZJXxOn15CwBhCQ=="
+                length="5665600"
+                type="application/octet-stream"
+            />
+        </item>
+    </channel>
+</rss>

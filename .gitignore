@@ -1,0 +1,10 @@
+.DS_Store
+*.md
+!README.md
+!PRIVACY.md
+!CONTRIBUTING.md
+!SECURITY.md
+!.github/**/*.md
+releases/
+Lychee.xcodeproj/xcuserdata/
+Lychee.xcodeproj/project.xcworkspace/xcuserdata/
