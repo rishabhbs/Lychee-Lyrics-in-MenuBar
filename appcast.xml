@@ -7,14 +7,14 @@
         <link>https://raw.githubusercontent.com/rishabhbs/Lychee-Lyrics-in-MenuBar/main/appcast.xml</link>
         <language>en</language>
         <item>
-            <title>Lychee 1.2.0</title>
-            <sparkle:version>14</sparkle:version>
-            <sparkle:shortVersionString>1.2.0</sparkle:shortVersionString>
-            <pubDate>Tue, 04 Aug 2026 10:50:40 +0000</pubDate>
+            <title>Lychee 1.2.1</title>
+            <sparkle:version>15</sparkle:version>
+            <sparkle:shortVersionString>1.2.1</sparkle:shortVersionString>
+            <pubDate>Tue, 29 Sep 2026 09:37:39 +0000</pubDate>
             <enclosure
-                url="https://github.com/rishabhbs/Lychee-Lyrics-in-MenuBar/releases/download/v1.2.0/Lychee-1.2.0.zip"
-                sparkle:edSignature="tgR2H1om749py3T40DyoR6YZ9ZRkd1/okB0uXNcoNPNy7vduHxbuz9OXDAUqHd9saGpYlFE2LS2nKibZVSacBQ=="
-                length="5780940"
+                url="https://github.com/rishabhbs/Lychee-Lyrics-in-MenuBar/releases/download/v1.2.1/Lychee-1.2.1.zip"
+                sparkle:edSignature="jeHWDd/dneu4KeD6t+8DDYs0Oe1sMz54lzXjApRSKkJB4OmeUvbqEi9jeSqMaAUO0OztSYC6Y91kxSf9iMhFAA=="
+                length="5787077"
                 type="application/octet-stream"
             />
         </item>
