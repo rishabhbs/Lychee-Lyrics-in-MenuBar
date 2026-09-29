@@ -12,6 +12,22 @@ import AppKit
 struct LyricsTextZone: View {
     @ObservedObject var trackState = TrackState.shared
     @ObservedObject var lyricsEngine = LyricsEngine.shared
+    @Environment(\.colorScheme) private var colorScheme
+
+    /// Dark text on a light menu bar reads thinner than white on dark, so light
+    /// mode uses weight 450 (halfway between Regular 400 and Medium 500) via
+    /// SF Pro's variable 'wght' axis. Shared with MenuBarContentView.measureTextWidth
+    /// so layout measurement stays in sync with rendering.
+    private static let regularFont = NSFont.systemFont(ofSize: 11, weight: .regular)
+    private static let lightModeFont: NSFont = {
+        let wghtAxis = NSNumber(value: 0x77676874) // 'wght'
+        let descriptor = regularFont.fontDescriptor.addingAttributes([.variation: [wghtAxis: 450]])
+        return NSFont(descriptor: descriptor, size: 11) ?? regularFont
+    }()
+
+    static func menuBarFont(for scheme: ColorScheme) -> NSFont {
+        scheme == .light ? lightModeFont : regularFont
+    }
 
     @State private var lineID = UUID()
     @State private var dotCount: Int = 1
@@ -61,7 +77,7 @@ struct LyricsTextZone: View {
     /// inserted at the word boundary that most evenly balances the two line widths.
     /// Returns `text` unchanged if it fits on one line.
     private func balancedText(_ text: String, maxWidth: CGFloat = 260) -> String {
-        let font = NSFont.systemFont(ofSize: 11, weight: .regular)
+        let font = Self.menuBarFont(for: colorScheme)
         let attrs: [NSAttributedString.Key: Any] = [.font: font]
         guard (text as NSString).size(withAttributes: attrs).width > maxWidth else { return text }
         let words = text.components(separatedBy: " ")
@@ -79,7 +95,7 @@ struct LyricsTextZone: View {
 
     var body: some View {
         Text(balancedText(baseText) + (showDots ? dots : ""))
-            .font(.system(size: 11, weight: .regular))
+            .font(Font(Self.menuBarFont(for: colorScheme) as CTFont))
             .foregroundColor(textColor)
             .lineLimit(2)
             .multilineTextAlignment(.leading)
@@ -109,16 +125,19 @@ struct LyricsTextZone: View {
             }
     }
 
+    /// Uses `.primary` so the text follows the menu bar's effective appearance
+    /// (which macOS derives from the wallpaper, not the system theme):
+    /// white on a dark menu bar, black on a light one.
     private var textColor: Color {
         if trackState.trackName.isEmpty {
-            // "Welcome to Lychee" → full white; "Play a song to get started" → visible but softer
-            return welcomeFinished ? .white.opacity(0.75) : .white
+            // "Welcome to Lychee" → full strength; "Play a song to get started" → visible but softer
+            return welcomeFinished ? .primary.opacity(0.75) : .primary
         }
 
         if trackState.lyricsState == .synced && trackState.isPlaying {
-            return .white.opacity(0.9)
+            return .primary.opacity(0.9)
         } else {
-            return .white.opacity(0.6)
+            return .primary.opacity(0.6)
         }
     }
 }

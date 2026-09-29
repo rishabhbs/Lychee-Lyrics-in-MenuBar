@@ -31,7 +31,7 @@ struct GapFillView: View {
                                 ForEach(0..<Int(width / 8), id: \.self) { _ in
                                     Text("·")
                                         .font(.system(size: 8))
-                                        .foregroundColor(.white.opacity(0.3))
+                                        .foregroundColor(.primary.opacity(0.3))
                                 }
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -39,7 +39,7 @@ struct GapFillView: View {
                         case .fade:
                             let opacity = min(0.4, (width - 20) / 100 * 0.4)
                             LinearGradient(
-                                colors: [.clear, .white.opacity(opacity)],
+                                colors: [Color.primary.opacity(0), Color.primary.opacity(opacity)],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
@@ -48,7 +48,8 @@ struct GapFillView: View {
                             
                         case .wave:
                             WavePath(width: width)
-                                .stroke(Color.white, lineWidth: 0.75)
+                                .stroke(Color.primary, lineWidth: 0.75)
+                                // Mask only uses alpha, so white here is intentional
                                 .mask(
                                     LinearGradient(
                                         colors: [Color.white.opacity(0.1), Color.white],

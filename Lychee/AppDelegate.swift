@@ -762,12 +762,14 @@ extension AppDelegate: NSPopoverDelegate {
 struct MenuBarContentView: View {
     @ObservedObject var lyricsEngine = LyricsEngine.shared
     @ObservedObject var trackState = TrackState.shared
+    @Environment(\.colorScheme) private var colorScheme
 
     let menuBarHeight: CGFloat
     private var totalWidth: CGFloat { trackState.effectiveMenuBarPixels - 16 }
 
     func measureTextWidth(_ text: String) -> CGFloat {
-        let font = NSFont.systemFont(ofSize: 11, weight: .regular)
+        // Must match the weight LyricsTextZone renders with
+        let font = LyricsTextZone.menuBarFont(for: colorScheme)
         let maxWidth: CGFloat = trackState.effectiveMenuBarPixels - 48
         let attrs: [NSAttributedString.Key: Any] = [.font: font]
 
