@@ -766,11 +766,16 @@ struct MenuBarContentView: View {
 
     let menuBarHeight: CGFloat
     private var totalWidth: CGFloat { trackState.effectiveMenuBarPixels - 16 }
+    private var showExpanded: Bool {
+        !trackState.isMinimized && trackState.effectiveMenuBarPixels > 28
+    }
+    private var artworkWidth: CGFloat { trackState.showAlbumArtwork ? 26 : 0 }
+    private var lyricsMaxWidth: CGFloat { max(0, totalWidth - artworkWidth - 6) }
 
     func measureTextWidth(_ text: String) -> CGFloat {
         // Must match the weight LyricsTextZone renders with
         let font = LyricsTextZone.menuBarFont(for: colorScheme)
-        let maxWidth: CGFloat = trackState.effectiveMenuBarPixels - 48
+        let maxWidth = lyricsMaxWidth
         let attrs: [NSAttributedString.Key: Any] = [.font: font]
 
         let boundingRect = (text as NSString).boundingRect(
@@ -834,20 +839,28 @@ struct MenuBarContentView: View {
     var textWidth: CGFloat { measureTextWidth(displayText) }
 
     var gapWidth: CGFloat {
-        let used: CGFloat = 20 + 6 + textWidth + 6
+        let used: CGFloat = artworkWidth + textWidth + 6
         return max(0, totalWidth - used)
     }
 
     var body: some View {
         HStack(spacing: 0) {
-            AlbumThumb()
-                .frame(width: 20, height: menuBarHeight)
-            
-            let showExpanded = !trackState.isMinimized && trackState.effectiveMenuBarPixels > 28
+            if trackState.showAlbumArtwork {
+                AlbumThumb()
+                    .frame(width: 20, height: menuBarHeight)
+                if showExpanded {
+                    Spacer().frame(width: 6)
+                }
+            } else if !showExpanded {
+                // Keep the compact status item visible and available to open the popover.
+                Image(systemName: "music.note")
+                    .frame(width: 20, height: menuBarHeight)
+                    .accessibilityLabel("Lychee")
+            }
+
             if showExpanded {
-                Spacer().frame(width: 6)
-                LyricsTextZone()
-                    .frame(maxWidth: trackState.effectiveMenuBarPixels - 48, alignment: .leading)
+                LyricsTextZone(maxWidth: lyricsMaxWidth)
+                    .frame(maxWidth: lyricsMaxWidth, alignment: .leading)
                 GapFillView(width: gapWidth)
                     .frame(width: gapWidth, height: menuBarHeight)
                 Spacer().frame(width: 6)

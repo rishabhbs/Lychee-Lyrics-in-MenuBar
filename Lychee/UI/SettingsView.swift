@@ -253,7 +253,7 @@ private struct CustomizeTabContent: View {
             }
 
             SettingRow(title: "Album Artwork",
-                       tooltip: "Show album artwork in the mini player.") {
+                       tooltip: "Show album artwork in the menu bar and mini player.") {
                 Toggle("Show Album Artwork", isOn: Binding(
                     get: { trackState.showAlbumArtwork },
                     set: { trackState.setShowAlbumArtwork($0) }

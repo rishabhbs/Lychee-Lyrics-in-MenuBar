@@ -13,6 +13,7 @@ struct LyricsTextZone: View {
     @ObservedObject var trackState = TrackState.shared
     @ObservedObject var lyricsEngine = LyricsEngine.shared
     @Environment(\.colorScheme) private var colorScheme
+    var maxWidth: CGFloat = 260
 
     /// Dark text on a light menu bar reads thinner than white on dark, so light
     /// mode uses weight 450 (halfway between Regular 400 and Medium 500) via
@@ -76,7 +77,7 @@ struct LyricsTextZone: View {
     /// If `text` would wrap to 2 lines within `maxWidth`, returns it with a `\n`
     /// inserted at the word boundary that most evenly balances the two line widths.
     /// Returns `text` unchanged if it fits on one line.
-    private func balancedText(_ text: String, maxWidth: CGFloat = 260) -> String {
+    private func balancedText(_ text: String, maxWidth: CGFloat) -> String {
         let font = Self.menuBarFont(for: colorScheme)
         let attrs: [NSAttributedString.Key: Any] = [.font: font]
         guard (text as NSString).size(withAttributes: attrs).width > maxWidth else { return text }
@@ -94,13 +95,13 @@ struct LyricsTextZone: View {
     }
 
     var body: some View {
-        Text(balancedText(baseText) + (showDots ? dots : ""))
+        Text(balancedText(baseText, maxWidth: maxWidth) + (showDots ? dots : ""))
             .font(Font(Self.menuBarFont(for: colorScheme) as CTFont))
             .foregroundColor(textColor)
             .lineLimit(2)
             .multilineTextAlignment(.leading)
             .fixedSize(horizontal: false, vertical: true)
-            .frame(maxWidth: 260, alignment: .leading)
+            .frame(maxWidth: maxWidth, alignment: .leading)
             .frame(maxHeight: .infinity, alignment: .center)
             .id(lineID)
             .transition(.asymmetric(
