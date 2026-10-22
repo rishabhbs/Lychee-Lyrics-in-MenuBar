@@ -64,6 +64,7 @@ class TrackState: ObservableObject {
     @Published var isPopoverShown: Bool = false
     @Published var isHydrating: Bool = false
     @Published var popoverTheme: PopoverTheme = .system
+    @Published var showAlbumArtwork: Bool = true
     @Published var algorithmVersion: AlgorithmVersion = .legacy
     @Published var lyricsFontSize: LyricsFontSize = .medium
     @Published var menuBarWidth: MenuBarWidth = .standard
@@ -79,8 +80,11 @@ class TrackState: ObservableObject {
     private init() {
         UserDefaults.standard.register(defaults: [
             "popoverTheme": PopoverTheme.system.rawValue,
-            "menuBarWidth": MenuBarWidth.standard.rawValue
+            "menuBarWidth": MenuBarWidth.standard.rawValue,
+            "showAlbumArtwork": true
         ])
+
+        showAlbumArtwork = UserDefaults.standard.bool(forKey: "showAlbumArtwork")
 
         // Load saved gap style from UserDefaults
         if let savedGapStyle = UserDefaults.standard.string(forKey: "gapStyle"),
@@ -262,6 +266,11 @@ class TrackState: ObservableObject {
     func setPopoverTheme(_ theme: PopoverTheme) {
         popoverTheme = theme
         UserDefaults.standard.set(theme.rawValue, forKey: "popoverTheme")
+    }
+
+    func setShowAlbumArtwork(_ show: Bool) {
+        showAlbumArtwork = show
+        UserDefaults.standard.set(show, forKey: "showAlbumArtwork")
     }
 
     func setAlgorithmVersion(_ v: AlgorithmVersion) {

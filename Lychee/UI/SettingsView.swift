@@ -252,6 +252,18 @@ private struct CustomizeTabContent: View {
                 .frame(height: 24)
             }
 
+            SettingRow(title: "Album Artwork",
+                       tooltip: "Show album artwork in the mini player.") {
+                Toggle("Show Album Artwork", isOn: Binding(
+                    get: { trackState.showAlbumArtwork },
+                    set: { trackState.setShowAlbumArtwork($0) }
+                ))
+                .labelsHidden()
+                .toggleStyle(.switch)
+                .controlSize(.small)
+                .frame(height: 24)
+            }
+
             SettingRow(title: "Menu Bar Size",
                        tooltip: "Width of Lychee's presence in the menu bar when expanded.") {
                 HStack(spacing: 16) {

@@ -20,8 +20,10 @@ struct MiniPlayerView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            albumArtView
-                .frame(width: 90, height: 90)
+            if trackState.showAlbumArtwork {
+                albumArtView
+                    .frame(width: 90, height: 90)
+            }
 
             VStack(alignment: .leading, spacing: 0) {
                 // Title + artist + open-player button
